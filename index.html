@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, viewport-fit=cover" />
+  <title>釜山隨身旅遊 APP</title>
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+  <meta name="theme-color" content="#FBF9F5" />
+  <style>
+    :root{--bg-color:#FBF9F5;--card-bg:#FFF;--card-sub:#F3EFE6;--primary:#8C6D58;--text-main:#4A3E3D;--text-sub:#7D7069;--accent-green:#7A8B7B;--accent-orange:#D9822B;--border-color:#EAE3D2;--radius:16px;--shadow:0 4px 12px rgba(140,109,88,.08)}
+    *{box-sizing:border-box;margin:0;padding:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;-webkit-tap-highlight-color:transparent}
+    body{background:var(--bg-color);color:var(--text-main);padding-bottom:80px;max-width:500px;margin:0 auto;min-height:100vh}
+    header{background:var(--bg-color);padding:16px 20px;position:sticky;top:0;z-index:100;border-bottom:1px solid var(--border-color);display:flex;justify-content:space-between;align-items:center}
+    header h1{font-size:1.2rem;color:var(--primary);letter-spacing:1px}
+    .tab-content{display:none;padding:16px;animation:fadeIn .3s ease}.tab-content.active{display:block}
+    @keyframes fadeIn{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:translateY(0)}}
+    .card{background:var(--card-bg);border-radius:var(--radius);padding:16px;margin-bottom:16px;border:1px solid var(--border-color);box-shadow:var(--shadow)}
+    .card h3{font-size:1.05rem;color:var(--primary);margin-bottom:10px;display:flex;align-items:center;gap:6px}
+    .btn{display:inline-block;padding:8px 12px;border-radius:8px;background:var(--card-sub);color:var(--primary);text-decoration:none;font-size:.85rem;font-weight:bold;border:1px solid var(--border-color);cursor:pointer}
+    .btn-primary{background:var(--primary);color:#fff;border:none}
+    .ticket{background:linear-gradient(135deg,#FFF 0%,var(--card-sub) 100%);border-left:6px solid var(--primary)}
+    .flight-route{display:flex;justify-content:space-between;align-items:center;margin:12px 0}.airport{font-weight:bold;font-size:1.1rem}
+    .day-selector{display:flex;gap:8px;overflow-x:auto;padding-bottom:8px;margin-bottom:12px}.day-btn{padding:6px 14px;background:var(--card-sub);border-radius:20px;font-size:.85rem;white-space:nowrap;cursor:pointer}.day-btn.active{background:var(--primary);color:#fff}
+    .timeline-item{border-left:2px dashed var(--border-color);padding-left:14px;margin-bottom:16px;position:relative}.timeline-item:before{content:"";position:absolute;left:-5px;top:4px;width:8px;height:8px;border-radius:50%;background:var(--primary)}
+    .jp-name{font-size:.8rem;color:var(--accent-green);margin:2px 0 6px}
+    input,select{width:100%;padding:10px;border:1px solid var(--border-color);border-radius:8px;margin-bottom:10px;background:var(--bg-color);color:var(--text-main)}
+    table{width:100%;border-collapse:collapse;font-size:.85rem;margin-top:8px}th,td{border:1px solid var(--border-color);padding:8px;text-align:left}th{background:var(--card-sub);color:var(--primary)}
+    nav{position:fixed;bottom:0;left:50%;transform:translateX(-50%);width:100%;max-width:500px;background:var(--card-bg);border-top:1px solid var(--border-color);display:flex;justify-content:space-around;padding:10px 0 calc(10px + env(safe-area-inset-bottom));z-index:1000}
+    .nav-item{display:flex;flex-direction:column;align-items:center;font-size:.75rem;color:var(--text-sub);cursor:pointer;text-decoration:none}.nav-item.active{color:var(--primary);font-weight:bold}.nav-item span{font-size:1.2rem;margin-bottom:2px}
+  </style>
+</head>
+<body>
+<header><h1>釜山漫遊 2026 釜山遊</h1><span style="font-size:.8rem;color:var(--accent-green)">圖文文青風隨身 APP</span></header>
+
+<div id="flights" class="tab-content active">
+  <div class="card ticket"><h3>✈️ 去程機票｜臺灣虎航 (IT606)</h3><p style="font-size:.85rem;color:var(--text-sub)">2026/10/08 (四)</p><div class="flight-route"><div class="airport">TPE 桃園 T1<br><span style="font-size:.8rem;font-weight:normal">16:40 起飛</span></div><div style="color:var(--primary)">➔</div><div class="airport">PUS 釜山金海<br><span style="font-size:.8rem;font-weight:normal">19:55 抵達</span></div></div><p style="font-size:.85rem;color:var(--accent-orange);background:#FFF3E0;padding:6px;border-radius:6px">💡 建議最晚到達機場時間：<strong>13:40</strong>（起飛前 3 小時）</p></div>
+  <div class="card ticket"><h3>✈️ 回程機票｜易斯達航空 (ZE987)</h3><p style="font-size:.85rem;color:var(--text-sub)">2026/10/13 (二) - 10/14 (三)</p><div class="flight-route"><div class="airport">PUS 釜山金海<br><span style="font-size:.8rem;font-weight:normal">22:25 起飛</span></div><div style="color:var(--primary)">➔</div><div class="airport">TPE 桃園<br><span style="font-size:.8rem;font-weight:normal">00:15 (+1天)</span></div></div><p style="font-size:.85rem;color:var(--accent-orange);background:#FFF3E0;padding:6px;border-radius:6px">💡 建議最晚到達機場時間：<strong>19:25</strong>（起飛前 3 小時）</p></div>
+</div>
+
+<div id="itinerary" class="tab-content">
+  <div class="day-selector">
+    <div class="day-btn active" onclick="showDay('day1',this)">10/08 (四)</div><div class="day-btn" onclick="showDay('day2',this)">10/09 (五)</div><div class="day-btn" onclick="showDay('day3',this)">10/10 (六)</div><div class="day-btn" onclick="showDay('day4',this)">10/11 (日)</div><div class="day-btn" onclick="showDay('day5',this)">10/12 (一)</div><div class="day-btn" onclick="showDay('day6',this)">10/13 (二)</div>
+  </div>
+  <div id="day1" class="day-content">
+    <div class="card timeline-item"><strong>20:30｜釜山拉梅爾海水spa飯店 Check-in</strong><div class="jp-name">🇯🇵 釜山ラメールツーリストホテル</div><p style="font-size:.85rem">부산 동구 조방로34번길 9</p><p style="font-size:.8rem;color:var(--text-sub);margin-top:4px">交通：金海輕軌➔沙上站轉乘2號線➔西面站轉1號線至凡一站。</p><a class="btn" style="margin-top:8px" href="https://map.naver.com/v5/search/부산%20동구%20조방로34번길%209" target="_blank">🗺️ Naver Map 導航</a></div>
+    <div class="card timeline-item"><strong>21:30｜晚餐：Kosonglong 本店 (코소롱 본점)</strong><div class="jp-name">🇯🇵 コソロン 本店（サムギョプサル）</div><p style="font-size:.85rem">부산 동구 조방로 39-11</p><a class="btn" style="margin-top:8px" href="https://map.naver.com/v5/search/부산%20동구%20조방로%2039-11" target="_blank">🗺️ Naver Map 導航</a></div>
+  </div>
+  <div id="day2" class="day-content" style="display:none">
+    <div class="card timeline-item"><strong>10:00｜松島海上纜車 (송도해상케이블카)</strong><div class="jp-name">🇯🇵 松島海上ケーブルカー</div><p style="font-size:.85rem">搭計程車至 송도해상케이블카 송도베이스테이션 (約11,500韓元)</p></div>
+    <div class="card timeline-item"><strong>11:00｜松島龍宮雲橋 (송도용궁구름다리)</strong><div class="jp-name">🇯🇵 松島竜宮雲橋</div></div>
+    <div class="card timeline-item"><strong>13:00｜午餐：海底貝殼王國 (바닷속 조개왕국)</strong><div class="jp-name">🇯🇵 バダッソッ チョゲワングッ（貝焼き）</div></div>
+    <div class="card timeline-item"><strong>15:00｜影島 ARTE MUSEUM (아르떼뮤지엄 부산)</strong><div class="jp-name">🇯🇵 アルテミュージアム釜山</div></div>
+    <div class="card timeline-item"><strong>17:00｜BIFF 廣場 → 光復路 → 樂天超市 → 南浦洞地下街</strong><div class="jp-name">🇯🇵 BIFF広場 / 光復路 / ロッテマート</div></div>
+    <div class="card timeline-item"><strong>21:30｜宵夜：橋村炸雞 凡一1號店</strong><div class="jp-name">🇯🇵 キョチョンチキン 凡一1号店</div></div>
+  </div>
+  <div id="day3" class="day-content" style="display:none">
+    <div class="card timeline-item"><strong>09:00｜早餐：凡一站飯捲</strong></div><div class="card timeline-item"><strong>10:15｜西面地下街 & 樂天百貨釜山本店</strong><div class="jp-name">🇯🇵 西面地下街 / ロッテ百貨店</div></div><div class="card timeline-item"><strong>11:45｜核桃家 西面店 (호두가)</strong><div class="jp-name">🇯🇵 ホドゥガ（クルミ饅頭）</div></div><div class="card timeline-item"><strong>12:00｜午餐：烤肉的男子 (고기굽는남자)</strong><div class="jp-name">🇯🇵 コギクンヌンナムジャ</div></div><div class="card timeline-item"><strong>13:30｜DAISO大創 & Chaakan Shoes</strong><div class="jp-name">🇯🇵 ダイソー / チャッカンシューズ</div></div><div class="card timeline-item"><strong>17:00｜晚餐：李在模披薩 西面中央店</strong><div class="jp-name">🇯🇵 イジェモピザ</div></div><div class="card timeline-item"><strong>18:45｜E-mart 門峴店</strong><div class="jp-name">🇯🇵 Eマート 門峴店</div></div>
+  </div>
+  <div id="day4" class="day-content" style="display:none">
+    <div class="card timeline-item"><strong>09:30｜海雲台社會飯店寄放行李</strong></div><div class="card timeline-item"><strong>10:00｜海雲台海岸列車（尾浦➔青沙浦➔松亭）</strong><div class="jp-name">🇯🇵 海雲台ブルーラインパーク</div></div><div class="card timeline-item"><strong>13:20｜午餐：機張市場 (大螃蟹)</strong><div class="jp-name">🇯🇵 機張市場（カニ）</div></div><div class="card timeline-item"><strong>15:15｜Skyline Luge & 樂天 Premium Outlet</strong><div class="jp-name">🇯🇵 スカイラインルージュ / ロッテアウトレット</div></div><div class="card timeline-item"><strong>19:40｜海雲台商圈逛街與晚餐</strong></div>
+  </div>
+  <div id="day5" class="day-content" style="display:none">
+    <div class="card timeline-item"><strong>08:00｜早餐：水邊最高豬肉湯飯</strong><div class="jp-name">🇯🇵 スビョンチェゴ デジクッパ</div></div><div class="card timeline-item"><strong>09:15｜海雲台沙灘 ➔ 冬柏島木棧道</strong></div><div class="card timeline-item"><strong>11:30｜海理團路 (文青街區 + 鮑魚粥午餐)</strong><div class="jp-name">🇯🇵 ヘリダンギル</div></div><div class="card timeline-item"><strong>18:30｜鑽石灣遊艇航程 (DIAMOND BAY)</strong><div class="jp-name">🇯🇵 ダイヤモンドベイ（ヨットクルーズ）</div></div><div class="card timeline-item"><strong>20:50｜宵夜：海雲台傳統市場</strong><div class="jp-name">🇯🇵 海雲台伝統市場</div></div>
+  </div>
+  <div id="day6" class="day-content" style="display:none">
+    <div class="card timeline-item"><strong>12:00｜退房寄行李 / 午餐：密陽血腸豬肉湯飯</strong></div><div class="card timeline-item"><strong>13:30｜海雲台自由巡禮與咖啡廳</strong></div><div class="card timeline-item"><strong>18:00｜前往金海機場 (搭乘 22:25 航班)</strong></div>
+  </div>
+  <div class="card" style="background:var(--card-sub)"><h3>💡 釜山必買必吃推薦</h3><p style="font-size:.85rem;line-height:1.5"><strong>必吃：</strong>堅果黑糖餅、豬肉湯飯、機張大螃蟹、烤扇貝、李在模起司披薩、釜山魚糕。<br><strong>必買：</strong>核桃家脆皮核桃餅、Chaakan Shoes 平價鞋款、樂天超市零食、大創文具雜貨。</p></div>
+</div>
+
+<div id="expenses" class="tab-content">
+  <div class="card"><h3>✍️ 個人記帳（韓元自動換台幣）</h3><p style="font-size:.8rem;color:var(--text-sub);margin-bottom:8px">預設匯率：1 TWD ≈ 42.5 KRW</p><input type="text" id="exp-name" placeholder="項目內容 (例：堅果黑糖餅)"><input type="number" id="exp-krw" placeholder="金額 (KRW 韓元)" oninput="calcTwd()"><p style="font-size:.85rem;color:var(--primary);margin-bottom:10px">➔ 約 NT$ <span id="exp-twd-preview">0</span> 元</p><button class="btn btn-primary" style="width:100%" onclick="addExpense()">新增消費紀錄</button></div>
+  <div class="card"><h3>📜 個人消費明細</h3><ul id="expense-list" style="font-size:.85rem;list-style:none"><li style="color:var(--text-sub)">尚無消費紀錄</li></ul><hr style="margin:10px 0;border:none;border-top:1px solid var(--border-color)"><p style="font-weight:bold;font-size:.9rem">總計：NT$ <span id="total-exp-twd">0</span> 元</p></div>
+</div>
+
+<div id="split" class="tab-content">
+  <div class="card"><h3>💰 第一部分：公基金專區</h3><p style="font-size:.8rem;color:var(--text-sub);margin-bottom:8px">每人已繳公基金 (TWD)：</p><div style="display:grid;grid-template-columns:1fr 1fr;gap:8px"><div>瑾：<input type="number" value="3000" class="fund-input" onchange="calcFund()"></div><div>琦：<input type="number" value="3000" class="fund-input" onchange="calcFund()"></div><div>樺：<input type="number" value="3000" class="fund-input" onchange="calcFund()"></div><div>胤：<input type="number" value="3000" class="fund-input" onchange="calcFund()"></div></div><p style="font-weight:bold;color:var(--primary);margin-top:6px">公基金總計：NT$ <span id="fund-total">12000</span> 元</p></div>
+  <div class="card"><h3>⚖️ 第二部分：團體行程分攤</h3><table><thead><tr><th>項目</th><th>總額(TWD)</th><th>每人應給</th></tr></thead><tbody><tr><td>松島纜車門票</td><td>1,880</td><td>470</td></tr><tr><td>機張市場海鮮</td><td>4,800</td><td>1,200</td></tr></tbody></table></div>
+  <div class="card"><h3>🤝 第三部分：個人墊付與結算</h3><p style="font-size:.8rem;color:var(--text-sub)">目前墊付矩陣算式：</p><div style="font-size:.85rem;background:var(--card-sub);padding:10px;border-radius:8px;margin-top:6px">🔹 瑾 先墊付了遊艇門票 NT$ 2,824<br><strong>結算：</strong>琦、樺、胤 需各自給 瑾 <strong>NT$ 706</strong> 元。</div></div>
+</div>
+
+<div id="tools" class="tab-content">
+  <div class="card"><h3>💱 匯率換算器</h3><div style="display:flex;gap:8px;align-items:center"><input type="number" id="calc-krw-input" placeholder="韓元 (KRW)" oninput="toolCalc('krw')"><span>₩</span></div><div style="display:flex;gap:8px;align-items:center"><input type="number" id="calc-twd-input" placeholder="台幣 (TWD)" oninput="toolCalc('twd')"><span>NT$</span></div></div>
+  <div class="card"><h3>🌐 快速工具</h3><a class="btn btn-primary" style="display:block;text-align:center;margin-bottom:10px" href="https://translate.google.com/?sl=auto&tl=ko" target="_blank">開啟 Google 翻譯 (韓文)</a></div>
+  <div class="card"><h3>🌤️ 釜山 10 月天氣與穿搭提醒</h3><p style="font-size:.85rem;line-height:1.5">10 月釜山氣溫約 <strong>14°C - 22°C</strong>，秋高氣爽非常舒適。但海邊早晚風大，建議採取洋蔥式穿法，隨身攜帶薄外套。</p></div>
+  <div class="card" style="border-left:4px solid var(--accent-orange)"><h3>🎉 韓國釜山 10 月節慶與國定假日</h3><ul style="font-size:.85rem;padding-left:16px;line-height:1.6"><li><strong>釜山國際影展 (BIFF)</strong>：10 月初登場，海雲台與 BIFF 廣場周邊人潮眾多。</li><li><strong>10/09 (五) 韓文節 (한글날)</strong>：韓國國定假日，熱門景點與商圈人潮湧現，搭乘計程車請預留塞車時間。</li></ul></div>
+</div>
+
+<nav>
+  <div class="nav-item active" onclick="switchTab('flights',this)"><span>✈️</span>航班</div><div class="nav-item" onclick="switchTab('itinerary',this)"><span>🗺️</span>行程</div><div class="nav-item" onclick="switchTab('expenses',this)"><span>✍️</span>記帳</div><div class="nav-item" onclick="switchTab('split',this)"><span>💰</span>分帳</div><div class="nav-item" onclick="switchTab('tools',this)"><span>🧰</span>工具</div>
+</nav>
+
+<script>
+function switchTab(tabId,element){document.querySelectorAll('.tab-content').forEach(el=>el.classList.remove('active'));document.querySelectorAll('.nav-item').forEach(el=>el.classList.remove('active'));document.getElementById(tabId).classList.add('active');element.classList.add('active');window.scrollTo(0,0)}
+function showDay(dayId,element){document.querySelectorAll('.day-content').forEach(el=>el.style.display='none');document.querySelectorAll('.day-btn').forEach(el=>el.classList.remove('active'));document.getElementById(dayId).style.display='block';element.classList.add('active')}
+let myExpenses=[];
+function calcTwd(){const krw=document.getElementById('exp-krw').value;document.getElementById('exp-twd-preview').innerText=Math.round(krw/42.5)||0}
+function addExpense(){const name=document.getElementById('exp-name').value.trim();const krw=document.getElementById('exp-krw').value;if(!name||!krw)return alert('請輸入項目與金額');const twd=Math.round(krw/42.5);myExpenses.push({name,krw,twd});renderExpenses();document.getElementById('exp-name').value='';document.getElementById('exp-krw').value='';document.getElementById('exp-twd-preview').innerText='0'}
+function renderExpenses(){const list=document.getElementById('expense-list');list.innerHTML='';let total=0;myExpenses.forEach(item=>{total+=item.twd;const li=document.createElement('li');li.style.padding='4px 0';li.innerHTML=`<span>${item.name}</span> <span style="float:right">₩${item.krw} (NT$ ${item.twd})</span>`;list.appendChild(li)});document.getElementById('total-exp-twd').innerText=total}
+function calcFund(){let sum=0;document.querySelectorAll('.fund-input').forEach(input=>sum+=Number(input.value)||0);document.getElementById('fund-total').innerText=sum}
+function toolCalc(type){if(type==='krw'){const krw=document.getElementById('calc-krw-input').value;document.getElementById('calc-twd-input').value=(krw/42.5).toFixed(1)}else{const twd=document.getElementById('calc-twd-input').value;document.getElementById('calc-krw-input').value=Math.round(twd*42.5)}}
+</script>
+</body>
+</html>
